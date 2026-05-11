@@ -74,146 +74,174 @@ export default function Home() {
     setSavings(estimatedSavings);
   };
 
-useEffect(() => {
-  localStorage.setItem(
-    "auditForm",
-    JSON.stringify({
-      tool,
-      plan,
-      spend,
-      teamSize,
-    })
-  );
-}, [tool, plan, spend, teamSize]);
+  useEffect(() => {
+    localStorage.setItem(
+      "auditForm",
+      JSON.stringify({
+        tool,
+        plan,
+        spend,
+        teamSize,
+      })
+    );
+  }, [tool, plan, spend, teamSize]);
 
-useEffect(() => {
-  const savedData = localStorage.getItem("auditForm");
+  useEffect(() => {
+    const savedData = localStorage.getItem("auditForm");
 
-  if (savedData) {
-    const parsedData = JSON.parse(savedData);
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
 
-    setTool(parsedData.tool || "");
-    setPlan(parsedData.plan || "");
-    setSpend(parsedData.spend || "");
-    setTeamSize(parsedData.teamSize || "");
-  }
-}, []);
+      setTool(parsedData.tool || "");
+      setPlan(parsedData.plan || "");
+      setSpend(parsedData.spend || "");
+      setTeamSize(parsedData.teamSize || "");
+    }
+  }, []);
 
-return (
-  <main className="min-h-screen bg-linear-to-b from-black via-zinc-950 to-black text-white p-8">
-    <div className="max-w-4xl mx-auto">
+  return (
+    <main className="min-h-screen bg-linear-to-b from-black via-zinc-950 to-black text-white p-8">
+      <div className="max-w-4xl mx-auto">
 
-      <h1 className="text-6xl font-extrabold mb-6 leading-tight">
-        Stop Overpaying for AI Tools
-      </h1>
+        <h1 className="text-6xl font-extrabold mb-6 leading-tight">
+          Stop Overpaying for AI Tools
+        </h1>
 
-      <p className="text-xl text-zinc-400 mb-12 max-w-2xl leading-relaxed">
-        Instantly audit your startup’s AI stack, uncover wasted spend, and discover smarter pricing options.
-      </p>
+        <p className="text-xl text-zinc-400 mb-12 max-w-2xl leading-relaxed">
+          Instantly audit your startup’s AI stack, uncover wasted spend, and discover smarter pricing options.
+        </p>
 
-      <div className="bg-zinc-900/70 backdrop-blur-xl p-6 rounded-2xl border border-zinc-800 space-y-6">
+        <div className="bg-zinc-900/70 backdrop-blur-xl p-6 rounded-2xl border border-zinc-800 space-y-6">
 
-        <div>
-          <label className="block mb-2 text-sm text-gray-400">
-            AI Tool
-          </label>
+          <div>
+            <label className="block mb-2 text-sm text-gray-400">
+              AI Tool
+            </label>
 
-          <select
-            value={tool}
-            onChange={(e) => setTool(e.target.value)}
-            className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
-          >
-            <option value="">Select Tool</option>
+            <select
+              value={tool}
+              onChange={(e) => setTool(e.target.value)}
+              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+            >
+              <option value="">Select Tool</option>
 
-            <option value="ChatGPT">ChatGPT</option>
-            <option value="Claude">Claude</option>
-            <option value="Cursor">Cursor</option>
-            <option value="GitHub Copilot">GitHub Copilot</option>
-            <option value="Gemini">Gemini</option>
-            <option value="Anthropic API">Anthropic API</option>
-            <option value="OpenAI API">OpenAI API</option>
-            <option value="Windsurf">Windsurf</option>
-            <option value="v0">v0</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block mb-2 text-sm text-gray-400">
-            Current Plan
-          </label>
-
-          <input
-            type="text"
-            placeholder="Example: Team Plan"
-            value={plan}
-            onChange={(e) => setPlan(e.target.value)}
-            className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-2 text-sm text-gray-400">
-            Monthly Spend ($)
-          </label>
-
-          <input
-            type="number"
-            placeholder="100"
-            value={spend}
-            onChange={(e) => setSpend(e.target.value)}
-            className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-2 text-sm text-gray-400">
-            Team Size
-          </label>
-
-          <input
-            type="number"
-            placeholder="5"
-            value={teamSize}
-            onChange={(e) => setTeamSize(e.target.value)}
-            className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
-          />
-        </div>
-
-        <button
-          type="button"
-          onClick={generateAudit}
-          className="w-full bg-white text-black font-semibold py-3 rounded-xl hover:bg-gray-200 transition"
-        >
-          Generate Audit
-        </button>
-
-
-
-        {auditResult && (
-          <div className="bg-zinc-800 p-5 rounded-xl border border-zinc-700 mt-6">
-
-            <h3 className="text-2xl font-bold mb-3">
-              Audit Results
-            </h3>
-
-            <p className="text-gray-300 mb-4">
-              {auditResult}
-            </p>
-
-            <div className="text-green-400 text-xl font-semibold">
-              Estimated Monthly Savings: ${savings}
-            </div>
-
-            <div className="text-gray-500 mt-2">
-              Estimated Annual Savings: ${savings * 12}
-            </div>
-
+              <option value="ChatGPT">ChatGPT</option>
+              <option value="Claude">Claude</option>
+              <option value="Cursor">Cursor</option>
+              <option value="GitHub Copilot">GitHub Copilot</option>
+              <option value="Gemini">Gemini</option>
+              <option value="Anthropic API">Anthropic API</option>
+              <option value="OpenAI API">OpenAI API</option>
+              <option value="Windsurf">Windsurf</option>
+              <option value="v0">v0</option>
+            </select>
           </div>
-        )}
+
+          <div>
+            <label className="block mb-2 text-sm text-gray-400">
+              Current Plan
+            </label>
+
+            <input
+              type="text"
+              placeholder="Example: Team Plan"
+              value={plan}
+              onChange={(e) => setPlan(e.target.value)}
+              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm text-gray-400">
+              Monthly Spend ($)
+            </label>
+
+            <input
+              type="number"
+              placeholder="100"
+              value={spend}
+              onChange={(e) => setSpend(e.target.value)}
+              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+            />
+          </div>
+
+          <div>
+            <label className="block mb-2 text-sm text-gray-400">
+              Team Size
+            </label>
+
+            <input
+              type="number"
+              placeholder="5"
+              value={teamSize}
+              onChange={(e) => setTeamSize(e.target.value)}
+              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={generateAudit}
+            className="w-full bg-white text-black font-semibold py-3 rounded-xl hover:bg-gray-200 transition"
+          >
+            Generate Audit
+          </button>
+
+
+
+          {auditResult && (
+            <div className="mt-8 space-y-6">
+
+              <div className="grid md:grid-cols-2 gap-4">
+
+                <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-6">
+                  <p className="text-green-400 text-sm mb-2">
+                    Monthly Savings
+                  </p>
+
+                  <h3 className="text-4xl font-bold text-green-300">
+                    ${savings}
+                  </h3>
+                </div>
+
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
+                  <p className="text-blue-400 text-sm mb-2">
+                    Annual Savings
+                  </p>
+
+                  <h3 className="text-4xl font-bold text-blue-300">
+                    ${savings * 12}
+                  </h3>
+                </div>
+
+              </div>
+
+              <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6">
+
+                <div className="flex items-center justify-between mb-4">
+
+                  <h3 className="text-2xl font-bold">
+                    Audit Recommendation
+                  </h3>
+
+                  <span className="bg-green-500/20 text-green-300 text-sm px-3 py-1 rounded-full">
+                    Optimization Found
+                  </span>
+
+                </div>
+
+                <p className="text-zinc-300 leading-relaxed text-lg">
+                  {auditResult}
+                </p>
+
+              </div>
+
+            </div>
+          )}
+
+        </div>
 
       </div>
-
-    </div>
-  </main>
-);
+    </main>
+  );
 }
