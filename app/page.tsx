@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [tool, setTool] = useState("");
@@ -44,6 +44,32 @@ export default function Home() {
   setAuditResult(recommendation);
   setSavings(estimatedSavings);
 };
+
+useEffect(() => {
+  localStorage.setItem(
+    "auditForm",
+    JSON.stringify({
+      tool,
+      plan,
+      spend,
+      teamSize,
+    })
+  );
+}, [tool, plan, spend, teamSize]);
+
+useEffect(() => {
+  const savedData = localStorage.getItem("auditForm");
+
+  if (savedData) {
+    const parsedData = JSON.parse(savedData);
+
+    setTool(parsedData.tool || "");
+    setPlan(parsedData.plan || "");
+    setSpend(parsedData.spend || "");
+    setTeamSize(parsedData.teamSize || "");
+  }
+}, []);
+
   return (
     <main className="min-h-screen bg-black text-white p-8">
       <div className="max-w-4xl mx-auto">
@@ -126,12 +152,27 @@ export default function Home() {
             Generate Audit
           </button>
 
+            
+
           {auditResult && (
             <div className="bg-zinc-800 p-5 rounded-xl border border-zinc-700 mt-6">
-              <h3 className="text-2xl font-bold mb-3">Audit Results</h3>
-              <p className="text-gray-300 mb-4">{auditResult}</p>
-              <div className="text-green-400 text-xl font-semibold">Estimated Monthly Savings: ${savings}</div>
-              <div className="text-gray-500 mt-2">Estimated Annual Savings: ${savings * 12}</div>
+
+              <h3 className="text-2xl font-bold mb-3">
+                Audit Results
+              </h3>
+
+              <p className="text-gray-300 mb-4">
+                {auditResult}
+              </p>
+
+              <div className="text-green-400 text-xl font-semibold">
+                Estimated Monthly Savings: ${savings}
+              </div>
+
+              <div className="text-gray-500 mt-2">
+                Estimated Annual Savings: ${savings * 12}
+              </div>
+
             </div>
           )}
 
