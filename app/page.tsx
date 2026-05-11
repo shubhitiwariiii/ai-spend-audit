@@ -233,6 +233,43 @@ export default function Home() {
                 <p className="text-zinc-300 leading-relaxed text-lg">
                   {auditResult}
                 </p>
+                <div className="mt-8 border-t border-zinc-800 pt-6">
+
+                  <h4 className="text-xl font-semibold mb-4">
+                    Save Your Full Audit Report
+                  </h4>
+
+                  <p className="text-zinc-400 mb-6">
+                    Get a shareable version of your AI spend audit and receive future optimization insights.
+                  </p>
+
+                  <div className="space-y-4">
+
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+                    />
+
+                    <input
+                      type="text"
+                      placeholder="Company Name (optional)"
+                      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+                    />
+
+                    <input
+                      type="text"
+                      placeholder="Your Role (optional)"
+                      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+                    />
+
+                    <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold py-3 rounded-xl transition">
+                      Save Audit Report
+                    </button>
+
+                  </div>
+
+                </div>
 
               </div>
 
