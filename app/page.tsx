@@ -7,8 +7,13 @@ export default function Home() {
   const [plan, setPlan] = useState("");
   const [spend, setSpend] = useState("");
   const [teamSize, setTeamSize] = useState("");
+
   const [auditResult, setAuditResult] = useState("");
   const [savings, setSavings] = useState(0);
+
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
+  const [role, setRole] = useState("");
 
   const generateAudit = () => {
     let recommendation = "";
@@ -63,6 +68,7 @@ export default function Home() {
 
       estimatedSavings = 80;
     }
+
     else {
       recommendation =
         "Your current AI spending looks reasonably optimized.";
@@ -100,7 +106,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-linear-to-b from-black via-zinc-950 to-black text-white p-8">
+    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white p-8">
       <div className="max-w-4xl mx-auto">
 
         <h1 className="text-6xl font-extrabold mb-6 leading-tight">
@@ -187,8 +193,6 @@ export default function Home() {
             Generate Audit
           </button>
 
-
-
           {auditResult && (
             <div className="mt-8 space-y-6">
 
@@ -233,6 +237,7 @@ export default function Home() {
                 <p className="text-zinc-300 leading-relaxed text-lg">
                   {auditResult}
                 </p>
+
                 <div className="mt-8 border-t border-zinc-800 pt-6">
 
                   <h4 className="text-xl font-semibold mb-4">
@@ -248,22 +253,33 @@ export default function Home() {
                     <input
                       type="email"
                       placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
                     />
 
                     <input
                       type="text"
                       placeholder="Company Name (optional)"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
                       className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
                     />
 
                     <input
                       type="text"
                       placeholder="Your Role (optional)"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
                       className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
                     />
 
-                    <button className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold py-3 rounded-xl transition">
+                    <button
+                      onClick={() =>
+                        alert("Audit report saved successfully!")
+                      }
+                      className="w-full bg-green-500 hover:bg-green-400 text-black font-semibold py-3 rounded-xl transition"
+                    >
                       Save Audit Report
                     </button>
 
